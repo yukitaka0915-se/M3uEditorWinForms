@@ -19,6 +19,10 @@ namespace M3uEditorWinForms
 
     private readonly string _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "textboxdata.json");
 
+    private const string title_NasPlayLists = "NASのプレイリスト群を参照するフォルダを指定してください。";
+    private const string title_uPnpPlayLists = "メディアサーバーにプレイリスト群を保存するフォルダを指定してください。";
+    private const string title_PhoneFavorites = "スマートフォンへファイルを転送するフォルダを指定してください。";
+
     public MainForm()
     {
       InitializeComponent();
@@ -28,9 +32,9 @@ namespace M3uEditorWinForms
 
     private void Form1_Load(object sender, EventArgs e)
     {
-      uCtrl_FldrBrowse_NASPlayLists.lbl_title.Text = "プレイリスト群を参照するフォルダを指定してください。";
-      uCtrl_FldrBrowse_uPnpPlayLists.lbl_title.Text = "プレイリスト群を保存するフォルダを指定してください。";
-      uCtrl_FldrBrowse_PhoneFavorite.lbl_title.Text = "スマートフォンへファイルを転送するフォルダを指定してください。";
+      uCtrl_FldrBrowse_NASPlayLists.lbl_title.Text = title_NasPlayLists;
+      uCtrl_FldrBrowse_uPnpPlayLists.lbl_title.Text = title_uPnpPlayLists;
+      uCtrl_FldrBrowse_PhoneFavorite.lbl_title.Text = title_PhoneFavorites;
     }
 
     private void MainForm_Load(object? sender, EventArgs e)
