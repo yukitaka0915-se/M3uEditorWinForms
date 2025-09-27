@@ -91,11 +91,22 @@
 
     public string Identifier { get; set; }
 
+    private TextBox _txt_folderpath;
     public TextBox txt_folderpath
     {
-      get => txt_folderpath;
-      set => txt_folderpath = value;
+      get => _txt_folderpath;
+      set => _txt_folderpath = value;
     }
+
+    public string GetText()
+    {
+      return txt_folderpath.Text;
+    }
+    public void SetText(string text)
+    {
+      txt_folderpath.Text = text;
+    }
+
     public Label lbl_title;
     public Boolean IsFolerExists
     {
