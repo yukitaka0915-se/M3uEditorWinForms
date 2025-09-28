@@ -28,57 +28,57 @@
     /// </summary>
     private void InitializeComponent()
     {
-      uCtrl_FldrBrowse_NASPlayLists = new UserControl_FolderBrowse();
-      uCtrl_FldrBrowse_PhoneFavorite = new UserControl_FolderBrowse();
-      uCtrl_FldrBrowse_uPnpPlayLists = new UserControl_FolderBrowse();
+      ucFoobar2000 = new UserControl_FolderBrowse();
+      ucPhone = new UserControl_FolderBrowse();
+      ucMedia = new UserControl_FolderBrowse();
       SuspendLayout();
       // 
-      // uCtrl_FldrBrowse_NASPlayLists
+      // ucFoobar2000
       // 
-      uCtrl_FldrBrowse_NASPlayLists.FolderPath = "";
-      uCtrl_FldrBrowse_NASPlayLists.Identifier = null;
-      uCtrl_FldrBrowse_NASPlayLists.Location = new Point(12, 12);
-      uCtrl_FldrBrowse_NASPlayLists.Name = "uCtrl_FldrBrowse_NASPlayLists";
-      uCtrl_FldrBrowse_NASPlayLists.Size = new Size(618, 76);
-      uCtrl_FldrBrowse_NASPlayLists.TabIndex = 0;
-      uCtrl_FldrBrowse_NASPlayLists.TitleText = "タイトルを表示";
+      ucFoobar2000.FolderPath = "";
+      ucFoobar2000.Identifier = null;
+      ucFoobar2000.Location = new Point(12, 12);
+      ucFoobar2000.Name = "ucFoobar2000";
+      ucFoobar2000.Size = new Size(618, 76);
+      ucFoobar2000.TabIndex = 0;
+      ucFoobar2000.TitleText = "タイトルを表示";
       // 
-      // uCtrl_FldrBrowse_PhoneFavorite
+      // ucPhone
       // 
-      uCtrl_FldrBrowse_PhoneFavorite.FolderPath = "";
-      uCtrl_FldrBrowse_PhoneFavorite.Identifier = null;
-      uCtrl_FldrBrowse_PhoneFavorite.Location = new Point(12, 94);
-      uCtrl_FldrBrowse_PhoneFavorite.Name = "uCtrl_FldrBrowse_PhoneFavorite";
-      uCtrl_FldrBrowse_PhoneFavorite.Size = new Size(618, 76);
-      uCtrl_FldrBrowse_PhoneFavorite.TabIndex = 1;
-      uCtrl_FldrBrowse_PhoneFavorite.TitleText = "タイトルを表示";
+      ucPhone.FolderPath = "";
+      ucPhone.Identifier = null;
+      ucPhone.Location = new Point(12, 176);
+      ucPhone.Name = "ucPhone";
+      ucPhone.Size = new Size(618, 76);
+      ucPhone.TabIndex = 1;
+      ucPhone.TitleText = "タイトルを表示";
       // 
-      // uCtrl_FldrBrowse_uPnpPlayLists
+      // ucMedia
       // 
-      uCtrl_FldrBrowse_uPnpPlayLists.FolderPath = "";
-      uCtrl_FldrBrowse_uPnpPlayLists.Identifier = null;
-      uCtrl_FldrBrowse_uPnpPlayLists.Location = new Point(12, 176);
-      uCtrl_FldrBrowse_uPnpPlayLists.Name = "uCtrl_FldrBrowse_uPnpPlayLists";
-      uCtrl_FldrBrowse_uPnpPlayLists.Size = new Size(618, 76);
-      uCtrl_FldrBrowse_uPnpPlayLists.TabIndex = 2;
-      uCtrl_FldrBrowse_uPnpPlayLists.TitleText = "タイトルを表示";
+      ucMedia.FolderPath = "";
+      ucMedia.Identifier = null;
+      ucMedia.Location = new Point(12, 94);
+      ucMedia.Name = "ucMedia";
+      ucMedia.Size = new Size(618, 76);
+      ucMedia.TabIndex = 2;
+      ucMedia.TitleText = "タイトルを表示";
       // 
       // MainForm
       // 
       AutoScaleDimensions = new SizeF(7F, 15F);
       AutoScaleMode = AutoScaleMode.Font;
       ClientSize = new Size(800, 450);
-      Controls.Add(uCtrl_FldrBrowse_uPnpPlayLists);
-      Controls.Add(uCtrl_FldrBrowse_PhoneFavorite);
-      Controls.Add(uCtrl_FldrBrowse_NASPlayLists);
+      Controls.Add(ucMedia);
+      Controls.Add(ucPhone);
+      Controls.Add(ucFoobar2000);
       Name = "MainForm";
       Text = "Foobar2000用m3uファイルの再設定";
       Load += MainForm_Load;
       ResumeLayout(false);
     }
-    private UserControl_FolderBrowse uCtrl_FldrBrowse_NASPlayLists;
-    private UserControl_FolderBrowse uCtrl_FldrBrowse_PhoneFavorite;
-    private UserControl_FolderBrowse uCtrl_FldrBrowse_uPnpPlayLists;
+    private UserControl_FolderBrowse ucFoobar2000;
+    private UserControl_FolderBrowse ucPhone;
+    private UserControl_FolderBrowse ucMedia;
 
     #endregion
 

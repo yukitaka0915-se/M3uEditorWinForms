@@ -16,26 +16,35 @@ namespace M3uEditorWinForms
 {
   public partial class MainForm : Form
   {
+    private readonly string _jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "textboxdata.json");
+    private readonly JsonSerializerOptions _jsonOptions = new()
+    {
+      WriteIndented = true // 可読性
+                           // 特殊文字のエスケープは System.Text.Json のデフォルトで有効
+    };
 
-    private readonly string _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "textboxdata.json");
-
-    private const string title_NasPlayLists = "NASのプレイリスト群を参照するフォルダを指定してください。";
-    private const string title_uPnpPlayLists = "メディアサーバーにプレイリスト群を保存するフォルダを指定してください。";
-    private const string title_PhoneFavorites = "スマートフォンへファイルを転送するフォルダを指定してください。";
 
     public MainForm()
     {
+
       InitializeComponent();
+
+      // 実行ファイルのあるフォルダに保存
+      var baseDir = AppContext.BaseDirectory;
+      _jsonPath = Path.Combine(baseDir, AppConstants.JsonFileName);
+
+      ucFoobar2000.TitleText = AppConstants.Titlefoobar2000; ;
+      ucMedia.TitleText = AppConstants.TitleMedia;
+      ucPhone.TitleText = AppConstants.TitlePhone;
+
       this.Load += MainForm_Load;
       this.FormClosing += MainForm_FormClosing;
+
     }
 
     private void MainForm_Load(object? sender, EventArgs e)
     {
       LoadTextBoxData();
-      uCtrl_FldrBrowse_NASPlayLists.TitleText = title_NasPlayLists;
-      uCtrl_FldrBrowse_uPnpPlayLists.TitleText = title_uPnpPlayLists;
-      uCtrl_FldrBrowse_PhoneFavorite.TitleText = title_PhoneFavorites;
     }
 
     private void MainForm_FormClosing(object? sender, FormClosingEventArgs e)
@@ -45,43 +54,39 @@ namespace M3uEditorWinForms
 
     private void LoadTextBoxData()
     {
-      if (!File.Exists(_filePath)) return;
-
-      var json = File.ReadAllText(_filePath);
-      var data = JsonSerializer.Deserialize<TextBoxData>(json);
-
-      if (data == null) return;
-
-      foreach (var ctrl in this.Controls.OfType<UserControl_FolderBrowse>())
+      // JSON 読み込み（存在しなければ空）
+      if (File.Exists(_jsonPath))
       {
-        if (!string.IsNullOrEmpty(ctrl.Identifier) && data.TryGetValue(ctrl.Identifier, out string? value))
+        try
         {
-          ctrl.SetText(value ?? string.Empty);
+          var json = File.ReadAllText(_jsonPath, Encoding.UTF8);
+          var state = JsonSerializer.Deserialize<AppState>(json, _jsonOptions);
+          if (state is not null)
+          {
+            ucFoobar2000.FolderPath = state.Foobar2000 ?? string.Empty;
+            ucMedia.FolderPath = state.MediaServer ?? string.Empty;
+            ucPhone.FolderPath = state.Smartphone ?? string.Empty;
+          }
+        }
+        catch
+        {
+          // 壊れた場合は無視して新規として扱う（必要ならメッセージ表示）
         }
       }
     }
 
     private void SaveTextBoxData()
     {
-      var data = new TextBoxData();
-
-      foreach (var ctrl in this.Controls.OfType<UserControl_FolderBrowse>())
+      var state = new AppState
       {
-        if (!string.IsNullOrEmpty(ctrl.Identifier))
-        {
-          // 改行コードなし、エスケープは自動
-          data[ctrl.Identifier] = ctrl.GetText();
-        }
-      }
-
-      var options = new JsonSerializerOptions
-      {
-        Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
-        WriteIndented = true
+        Foobar2000 = ucFoobar2000.FolderPath,
+        MediaServer = ucMedia.FolderPath,
+        Smartphone = ucPhone.FolderPath
       };
 
-      string json = JsonSerializer.Serialize(data, options);
-      File.WriteAllText(_filePath, json);
+      var json = JsonSerializer.Serialize(state, _jsonOptions);
+      Directory.CreateDirectory(Path.GetDirectoryName(_jsonPath)!);
+      File.WriteAllText(_jsonPath, json, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
     }
 
   }
