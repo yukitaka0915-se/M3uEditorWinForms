@@ -33,9 +33,9 @@ namespace M3uEditorWinForms
     private void MainForm_Load(object? sender, EventArgs e)
     {
       LoadTextBoxData();
-      uCtrl_FldrBrowse_NASPlayLists.lbl_title.Text = title_NasPlayLists;
-      uCtrl_FldrBrowse_uPnpPlayLists.lbl_title.Text = title_uPnpPlayLists;
-      uCtrl_FldrBrowse_PhoneFavorite.lbl_title.Text = title_PhoneFavorites;
+      uCtrl_FldrBrowse_NASPlayLists.TitleText = title_NasPlayLists;
+      uCtrl_FldrBrowse_uPnpPlayLists.TitleText = title_uPnpPlayLists;
+      uCtrl_FldrBrowse_PhoneFavorite.TitleText = title_PhoneFavorites;
     }
 
     private void MainForm_FormClosing(object? sender, FormClosingEventArgs e)

@@ -28,36 +28,21 @@
     /// </summary>
     private void InitializeComponent()
     {
-      txt_folderpath = new TextBox();
-      btn_folderblows = new Button();
-      folderBrowserDialog1 = new FolderBrowserDialog();
+      btnBrowse = new Button();
+      folderBrowserDialog = new FolderBrowserDialog();
       lbl_title = new Label();
+      txtPath = new TextBox();
       SuspendLayout();
       // 
-      // txt_folderpath
+      // btnBrowse
       // 
-      txt_folderpath.Font = new Font("メイリオ", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 128);
-      txt_folderpath.Location = new Point(0, 21);
-      txt_folderpath.Multiline = true;
-      txt_folderpath.Name = "txt_folderpath";
-      txt_folderpath.Size = new Size(547, 49);
-      txt_folderpath.TabIndex = 0;
-      txt_folderpath.TextChanged += txt_folderpath_TextChanged;
-      txt_folderpath.Leave += txt_folderpath_Leave;
-      // 
-      // btn_folderblows
-      // 
-      btn_folderblows.Location = new Point(553, 21);
-      btn_folderblows.Name = "btn_folderblows";
-      btn_folderblows.Size = new Size(56, 49);
-      btn_folderblows.TabIndex = 1;
-      btn_folderblows.Text = "フォルダ参照";
-      btn_folderblows.UseVisualStyleBackColor = true;
-      btn_folderblows.Click += btn_folderblows_Click;
-      // 
-      // openFileDialog1
-      // 
-      openFileDialog1.FileName = "openFileDialog1";
+      btnBrowse.Location = new Point(553, 21);
+      btnBrowse.Name = "btnBrowse";
+      btnBrowse.Size = new Size(56, 49);
+      btnBrowse.TabIndex = 1;
+      btnBrowse.Text = "フォルダ参照";
+      btnBrowse.UseVisualStyleBackColor = true;
+      btnBrowse.Click += btnBrowse_Click;
       // 
       // lbl_title
       // 
@@ -69,13 +54,22 @@
       lbl_title.TabIndex = 2;
       lbl_title.Text = "タイトルを表示";
       // 
+      // txtPath
+      // 
+      txtPath.Location = new Point(5, 21);
+      txtPath.Multiline = true;
+      txtPath.Name = "txtPath";
+      txtPath.Size = new Size(542, 49);
+      txtPath.TabIndex = 3;
+      txtPath.TextChanged += txtPath_TextChanged;
+      // 
       // UserControl_FolderBrowse
       // 
       AutoScaleDimensions = new SizeF(7F, 15F);
       AutoScaleMode = AutoScaleMode.Font;
+      Controls.Add(txtPath);
       Controls.Add(lbl_title);
-      Controls.Add(btn_folderblows);
-      Controls.Add(txt_folderpath);
+      Controls.Add(btnBrowse);
       Name = "UserControl_FolderBrowse";
       Size = new Size(618, 76);
       ResumeLayout(false);
@@ -84,34 +78,43 @@
 
     #endregion
 
-    private Button btn_folderblows;
-    private FolderBrowserDialog folderBrowserDialog1;
-    private OpenFileDialog openFileDialog1;
+    private Button btnBrowse;
+    private FolderBrowserDialog folderBrowserDialog;
 
     public string Identifier { get; set; }
+    private bool _internalUpdate;
 
-    private TextBox _txt_folderpath;
-    private TextBox txt_folderpath
+    private Label lbl_title;
+    public string TitleText
     {
-      get => _txt_folderpath;
-      set => _txt_folderpath = value;
+      get => lbl_title.Text;
+      set => lbl_title.Text = value;
     }
+
+    private TextBox _txtPath;
+
+    public string FolderPath
+    {
+      get => _txtPath.Text;
+      set
+      {
+        if (!string.Equals(_txtPath.Text, value, StringComparison.Ordinal))
+          _txtPath.Text = value ?? string.Empty;
+      }
+    }
+
 
     public string GetText()
     {
-      return txt_folderpath.Text;
+      return _txtPath.Text;
     }
     public void SetText(string text)
     {
-      txt_folderpath.Text = text;
+      _txtPath.Text = text;
     }
+    private TextBox txtPath;
 
-    public Label lbl_title;
-    public Boolean IsFolerExists
-    {
-      get => (txt_folderpath.BackColor == Color.White);
-
-    }
+    public bool IsValid => Directory.Exists(_txtPath.Text);
 
   }
 }
