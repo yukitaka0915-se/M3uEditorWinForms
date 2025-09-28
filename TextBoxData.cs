@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace M3uEditorWinForms
 {
-  internal class TextBoxData : Dictionary<string, string>
-  {
-  }
 
   public sealed class AppState
   {
