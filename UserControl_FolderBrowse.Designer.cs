@@ -31,7 +31,6 @@
       txt_folderpath = new TextBox();
       btn_folderblows = new Button();
       folderBrowserDialog1 = new FolderBrowserDialog();
-      openFileDialog1 = new OpenFileDialog();
       lbl_title = new Label();
       SuspendLayout();
       // 
@@ -92,7 +91,7 @@
     public string Identifier { get; set; }
 
     private TextBox _txt_folderpath;
-    public TextBox txt_folderpath
+    private TextBox txt_folderpath
     {
       get => _txt_folderpath;
       set => _txt_folderpath = value;

@@ -26,7 +26,7 @@ namespace M3uEditorWinForms
       folderBrowserDialog1.Description = "フォルダを選択してください。";
       if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
       {
-        txt_folderpath.Text = Folderpath_molding(folderBrowserDialog1.SelectedPath);
+        this.SetText(Folderpath_molding(folderBrowserDialog1.SelectedPath));
       }
 
     }
@@ -49,7 +49,7 @@ namespace M3uEditorWinForms
       if (txt_folderpath.BackColor == Color.White)
       {
 
-        txt_folderpath.Text = Folderpath_molding(txt_folderpath.Text);
+        this.SetText(Folderpath_molding(txt_folderpath.Text));
 
       }
     }
