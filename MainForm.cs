@@ -272,41 +272,34 @@ namespace M3uEditorWinForms
           text = await reader.ReadToEndAsync().ConfigureAwait(false);
         }
 
-        // 行単位で置換（# で始まる行はそのまま）
-        var lines = text.Replace("\r\n", "\n").Replace('\r', '\n').Split('\n');
-        var sb = new StringBuilder(text.Length + 256);
-
-        // 比較のための 2 形態（\ と /）
-        var rootBS = mediaRootForReplace;                    // 例 "D:\Media"
-        var rootSL = mediaRootForReplace.Replace('\\', '/'); // 例 "D:/Media"
-
-        for (int i = 0; i < lines.Length; i++)
-        {
-          var line = lines[i];
-
-          string outLine;
-          if (line.Length > 0 && line[0] != '#')
-          {
-            // 前後空白は触らない。プレーンな前方一致だけ行う。
-            outLine = ReplaceRootPrefixWithDot(line, rootBS, rootSL);
-          }
-          else
-          {
-            outLine = line; // コメントや空行はそのまま
-          }
-
-          sb.Append(outLine);
-          if (i < lines.Length - 1) sb.Append('\n'); // 元の改行系はLFに寄せる（一般的）
-        }
-
         var dstName = "UTF8_" + Path.GetFileName(srcPath);
         var dstPath = Path.Combine(dstDir, dstName);
 
+        // ★ ここから：CRLF で書き出す（NewLine を明示）
         using (var writer = new StreamWriter(dstPath, append: false, Utf8NoBom))
         {
-          await writer.WriteAsync(sb.ToString()).ConfigureAwait(false);
-        }
+          writer.NewLine = "\r\n";
 
+          var rootBS = mediaRootForReplace;                    // 例: D:\Media
+          var rootSL = mediaRootForReplace.Replace('\\', '/'); // 例: D:/Media
+
+          using var sr = new StringReader(text);
+          string? line;
+
+          while ((line = await sr.ReadLineAsync().ConfigureAwait(false)) is not null)
+          {
+            string outLine =
+                (line.Length > 0 && line[0] != '#')
+                ? ReplaceRootPrefixWithDot(line, rootBS, rootSL)
+                : line;
+
+            // WriteLine を使うので、出力は常に CRLF
+            // 逐次書き込みでメモリ使用も抑えます
+            await writer.WriteLineAsync(outLine).ConfigureAwait(false);
+
+          }
+
+        }
         return true;
       }
       catch
