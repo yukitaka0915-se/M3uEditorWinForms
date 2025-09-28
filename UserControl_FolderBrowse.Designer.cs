@@ -91,30 +91,28 @@
       set => lbl_title.Text = value;
     }
 
-    private TextBox _txtPath;
-
     public string FolderPath
     {
-      get => _txtPath.Text;
+      get => txtPath.Text;
       set
       {
-        if (!string.Equals(_txtPath.Text, value, StringComparison.Ordinal))
-          _txtPath.Text = value ?? string.Empty;
+        if (!string.Equals(txtPath.Text, value, StringComparison.Ordinal))
+          txtPath.Text = value ?? string.Empty;
       }
     }
 
 
     public string GetText()
     {
-      return _txtPath.Text;
+      return txtPath.Text;
     }
     public void SetText(string text)
     {
-      _txtPath.Text = text;
+      txtPath.Text = text;
     }
     private TextBox txtPath;
 
-    public bool IsValid => Directory.Exists(_txtPath.Text);
+    public bool IsValid => Directory.Exists(txtPath.Text);
 
   }
 }

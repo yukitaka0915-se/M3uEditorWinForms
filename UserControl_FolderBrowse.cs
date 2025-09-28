@@ -19,13 +19,13 @@ namespace M3uEditorWinForms
       InitializeComponent();
 
       // 推奨プロパティ
-      txt_folderpath.Multiline = true;
-      txt_folderpath.AcceptsReturn = false; // 改行を入れない
-      txt_folderpath.AcceptsTab = false;
-      txt_folderpath.WordWrap = true;
+      txtPath.Multiline = true;
+      txtPath.AcceptsReturn = false; // 改行を入れない
+      txtPath.AcceptsTab = false;
+      txtPath.WordWrap = true;
 
-      txt_folderpath.TextChanged += txt_folderpath_TextChanged;
-      btnBrowse.Click += btn_folderbrows_Click;
+      //txtPath.TextChanged += txtPath_TextChanged;
+      //btnBrowse.Click += btn_folderbrows_Click;
 
     }
 
@@ -50,19 +50,7 @@ namespace M3uEditorWinForms
 
     }
 
-    private void btn_folderbrows_Click(object? sender, EventArgs e)
-    {
-
-      //folderBrowserDialog1.RootFolder = Environment.SpecialFolder.Desktop;
-      //folderBrowserDialog1.SelectedPath = txt_folderpath.Text;
-      //folderBrowserDialog1.Description = "フォルダを選択してください。";
-      //if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-      //{
-      //  this.SetText(Folderpath_molding(folderBrowserDialog1.SelectedPath));
-      //}
-
-    }
-    private void txtPath_TextChanged(object sender, EventArgs e)
+    private void txtPath_TextChanged(object? sender, EventArgs e)
     {
 
       if (_internalUpdate) return;
@@ -88,23 +76,6 @@ namespace M3uEditorWinForms
         txtPath.SelectionStart = txtPath.TextLength;
         txtPath.SelectionLength = 0;
       }
-
-    }
-
-    private void txt_folderpath_TextChanged(object? sender, EventArgs e)
-    {
-
-
-      //DirectoryInfo di = new DirectoryInfo(txt_folderpath.Text);
-      //if (di.Exists)
-      //{
-      //  txt_folderpath.BackColor = Color.White;
-      //}
-      //else
-      //{
-      //  txt_folderpath.BackColor = Color.Pink;
-      //}
-
 
     }
 
