@@ -14,6 +14,9 @@ namespace M3uEditorWinForms
 {
   public partial class UserControl_FolderBrowse : UserControl
   {
+
+    public event EventHandler<string>? ValidFolderConfirmed; // ★追加（引数は正規化後パス）
+                                                             // 追加：共通処理
     public UserControl_FolderBrowse()
     {
       InitializeComponent();
@@ -23,9 +26,6 @@ namespace M3uEditorWinForms
       txtPath.AcceptsReturn = false; // 改行を入れない
       txtPath.AcceptsTab = false;
       txtPath.WordWrap = true;
-
-      //txtPath.TextChanged += txtPath_TextChanged;
-      //btnBrowse.Click += btn_folderbrows_Click;
 
     }
 
@@ -45,12 +45,18 @@ namespace M3uEditorWinForms
       if (fbd.ShowDialog(FindForm()) == DialogResult.OK)
       {
         FolderPath = fbd.SelectedPath;
+        ApplyNormalizationAndValidation(); // ←追加
       }
-
 
     }
 
-    private void txtPath_TextChanged(object? sender, EventArgs e)
+    private void txtPath_Leave(object sender, EventArgs e)
+    {
+      ApplyNormalizationAndValidation();
+
+    }
+
+    private void ApplyNormalizationAndValidation()
     {
 
       if (_internalUpdate) return;
@@ -72,9 +78,13 @@ namespace M3uEditorWinForms
       finally
       {
         _internalUpdate = false;
+
         // キャレットを末尾へ（必要なら）
         txtPath.SelectionStart = txtPath.TextLength;
         txtPath.SelectionLength = 0;
+        
+        // 有効フォルダになったら通知
+        ValidFolderConfirmed?.Invoke(this, txtPath.Text);
       }
 
     }
@@ -116,30 +126,6 @@ namespace M3uEditorWinForms
     }
 
 
-
-
-
-
-    //private void txt_folderpath_Leave(object sender, EventArgs e)
-    //{
-    //  if (txt_folderpath.BackColor == Color.White)
-    //  {
-
-    //    this.SetText(Folderpath_molding(txt_folderpath.Text));
-
-    //  }
-    //}
-
-    //private static string Folderpath_molding (string s)
-    //{
-
-    //  if (!s.EndsWith("\\"))
-    //  {
-    //    s += "\\";
-    //  }
-
-    //  return s;
-    //}
 
   }
 

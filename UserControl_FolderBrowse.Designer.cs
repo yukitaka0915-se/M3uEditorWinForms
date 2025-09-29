@@ -61,7 +61,7 @@
       txtPath.Name = "txtPath";
       txtPath.Size = new Size(542, 49);
       txtPath.TabIndex = 3;
-      txtPath.TextChanged += txtPath_TextChanged;
+      txtPath.Leave += txtPath_Leave;
       // 
       // UserControl_FolderBrowse
       // 
