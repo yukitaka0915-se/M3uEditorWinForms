@@ -40,13 +40,15 @@
       tscbExclude = new ToolStripComboBox();
       tsbAddExclude = new ToolStripButton();
       tsbRemoveExclude = new ToolStripButton();
+      tssSepProgress = new ToolStripSeparator();
+      tspbOverall = new ToolStripProgressBar();
       groupBox1 = new GroupBox();
       btnMakeMedia = new Button();
       ucMedia = new UserControl_FolderBrowse();
       ucFoobar2000 = new UserControl_FolderBrowse();
       groupBox2 = new GroupBox();
       ucParent = new UserControl_FolderBrowse();
-      btnMakePhoneCpy = new Button();
+      btnMakePhoneCopy = new Button();
       ucPhone = new UserControl_FolderBrowse();
       ((System.ComponentModel.ISupportInitialize)dgvFiles).BeginInit();
       toolStrip1.SuspendLayout();
@@ -58,7 +60,7 @@
       // 
       btnQuit.Font = new Font("メイリオ", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 128);
       btnQuit.ForeColor = Color.Red;
-      btnQuit.Location = new Point(642, 560);
+      btnQuit.Location = new Point(642, 681);
       btnQuit.Name = "btnQuit";
       btnQuit.Size = new Size(94, 44);
       btnQuit.TabIndex = 5;
@@ -72,7 +74,7 @@
       dgvFiles.Columns.AddRange(new DataGridViewColumn[] { Selected, FileName, FullPath, Status });
       dgvFiles.Location = new Point(12, 328);
       dgvFiles.Name = "dgvFiles";
-      dgvFiles.Size = new Size(742, 226);
+      dgvFiles.Size = new Size(742, 347);
       dgvFiles.TabIndex = 6;
       // 
       // Selected
@@ -108,7 +110,7 @@
       // 
       // toolStrip1
       // 
-      toolStrip1.Items.AddRange(new ToolStripItem[] { tslExclude, tscbExclude, tsbAddExclude, tsbRemoveExclude });
+      toolStrip1.Items.AddRange(new ToolStripItem[] { tslExclude, tscbExclude, tsbAddExclude, tsbRemoveExclude, tssSepProgress, tspbOverall });
       toolStrip1.Location = new Point(0, 0);
       toolStrip1.Name = "toolStrip1";
       toolStrip1.Size = new Size(764, 25);
@@ -143,6 +145,18 @@
       tsbRemoveExclude.Name = "tsbRemoveExclude";
       tsbRemoveExclude.Size = new Size(23, 22);
       tsbRemoveExclude.Text = "ー";
+      // 
+      // tssSepProgress
+      // 
+      tssSepProgress.Name = "tssSepProgress";
+      tssSepProgress.Size = new Size(6, 25);
+      // 
+      // tspbOverall
+      // 
+      tspbOverall.AutoSize = false;
+      tspbOverall.Name = "tspbOverall";
+      tspbOverall.Size = new Size(300, 22);
+      tspbOverall.Visible = false;
       // 
       // groupBox1
       // 
@@ -189,7 +203,7 @@
       // groupBox2
       // 
       groupBox2.Controls.Add(ucParent);
-      groupBox2.Controls.Add(btnMakePhoneCpy);
+      groupBox2.Controls.Add(btnMakePhoneCopy);
       groupBox2.Controls.Add(ucPhone);
       groupBox2.Location = new Point(12, 177);
       groupBox2.Name = "groupBox2";
@@ -208,21 +222,21 @@
       ucParent.TabIndex = 11;
       ucParent.TitleText = "タイトルを表示";
       // 
-      // btnMakePhoneCpy
+      // btnMakePhoneCopy
       // 
-      btnMakePhoneCpy.Font = new Font("メイリオ", 9.75F);
-      btnMakePhoneCpy.Location = new Point(630, 59);
-      btnMakePhoneCpy.Name = "btnMakePhoneCpy";
-      btnMakePhoneCpy.Size = new Size(94, 50);
-      btnMakePhoneCpy.TabIndex = 10;
-      btnMakePhoneCpy.Text = "開始";
-      btnMakePhoneCpy.UseVisualStyleBackColor = true;
+      btnMakePhoneCopy.Font = new Font("メイリオ", 9.75F);
+      btnMakePhoneCopy.Location = new Point(630, 59);
+      btnMakePhoneCopy.Name = "btnMakePhoneCopy";
+      btnMakePhoneCopy.Size = new Size(94, 50);
+      btnMakePhoneCopy.TabIndex = 10;
+      btnMakePhoneCopy.Text = "開始";
+      btnMakePhoneCopy.UseVisualStyleBackColor = true;
       // 
       // ucPhone
       // 
       ucPhone.FolderPath = "";
       ucPhone.Identifier = null;
-      ucPhone.Location = new Point(6, 78);
+      ucPhone.Location = new Point(6, 79);
       ucPhone.Name = "ucPhone";
       ucPhone.Size = new Size(618, 60);
       ucPhone.TabIndex = 9;
@@ -232,7 +246,7 @@
       // 
       AutoScaleDimensions = new SizeF(7F, 15F);
       AutoScaleMode = AutoScaleMode.Font;
-      ClientSize = new Size(764, 610);
+      ClientSize = new Size(764, 737);
       Controls.Add(groupBox2);
       Controls.Add(groupBox1);
       Controls.Add(toolStrip1);
@@ -269,7 +283,9 @@
     private UserControl_FolderBrowse ucFoobar2000;
     private GroupBox groupBox2;
     private UserControl_FolderBrowse ucParent;
-    private Button btnMakePhoneCpy;
+    private Button btnMakePhoneCopy;
     private UserControl_FolderBrowse ucPhone;
+    private ToolStripSeparator tssSepProgress;
+    private ToolStripProgressBar tspbOverall;
   }
 }
