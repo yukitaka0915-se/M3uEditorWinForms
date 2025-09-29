@@ -65,6 +65,7 @@ namespace M3uEditorWinForms
 
             ucFoobar2000.TitleText = AppConstants.Titlefoobar2000;
             ucMedia.TitleText = AppConstants.TitleMedia;
+            ucParent.TitleText = AppConstants.TitleParent;
             ucPhone.TitleText = AppConstants.TitlePhone;
 
             InitFileGrid();
@@ -108,6 +109,7 @@ namespace M3uEditorWinForms
                     {
                         ucFoobar2000.FolderPath = state.Foobar2000 ?? string.Empty;
                         ucMedia.FolderPath = state.MediaServer ?? string.Empty;
+                        ucParent.FolderPath = state.Parents ?? string.Empty;
                         ucPhone.FolderPath = state.Smartphone ?? string.Empty;
                         tscbExclude.Items.Clear();
                         foreach (var name in state.ExcludeFileNames ?? Enumerable.Empty<string>())
@@ -133,6 +135,7 @@ namespace M3uEditorWinForms
             {
                 Foobar2000 = ucFoobar2000.FolderPath,
                 MediaServer = ucMedia.FolderPath,
+                Parents = ucParent.FolderPath,
                 Smartphone = ucPhone.FolderPath,
                 ExcludeFileNames = tscbExclude.Items
                     .Cast<object>()

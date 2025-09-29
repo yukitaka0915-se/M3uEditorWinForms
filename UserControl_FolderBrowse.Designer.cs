@@ -38,9 +38,9 @@
       // 
       btnBrowse.Location = new Point(553, 21);
       btnBrowse.Name = "btnBrowse";
-      btnBrowse.Size = new Size(56, 49);
+      btnBrowse.Size = new Size(56, 34);
       btnBrowse.TabIndex = 1;
-      btnBrowse.Text = "フォルダ参照";
+      btnBrowse.Text = "参照";
       btnBrowse.UseVisualStyleBackColor = true;
       btnBrowse.Click += btnBrowse_Click;
       // 
@@ -59,7 +59,7 @@
       txtPath.Location = new Point(5, 21);
       txtPath.Multiline = true;
       txtPath.Name = "txtPath";
-      txtPath.Size = new Size(542, 49);
+      txtPath.Size = new Size(542, 34);
       txtPath.TabIndex = 3;
       txtPath.Leave += txtPath_Leave;
       // 
@@ -71,7 +71,7 @@
       Controls.Add(lbl_title);
       Controls.Add(btnBrowse);
       Name = "UserControl_FolderBrowse";
-      Size = new Size(618, 76);
+      Size = new Size(618, 66);
       ResumeLayout(false);
       PerformLayout();
     }

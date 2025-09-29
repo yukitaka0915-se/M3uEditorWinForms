@@ -12,6 +12,7 @@ namespace M3uEditorWinForms
   {
     public string? Foobar2000 { get; set; }
     public string? MediaServer { get; set; }
+    public string? Parents { get; set; }
     public string? Smartphone { get; set; }
     public List<string>? ExcludeFileNames { get; set; }
   }
